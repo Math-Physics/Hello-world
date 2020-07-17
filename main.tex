@@ -1,0 +1,150 @@
+\documentclass[12pt]{book}
+%\usepackage[UTF8]{ctex}%
+\linespread{1.5}%1.5倍行距
+%\usepackage[no-math]{fontspec}
+\usepackage{fontspec}
+%\usepackage{unicode-math}
+\usepackage{amssymb}%与unicode-math冲突
+\usepackage{arev}%与可爱字体搭配的数学字体
+\setmainfont{Comic Sans MS}
+%\setmainfont{Segoe Print}
+%\setmathfont{TeX Gyre Bonum Math}
+%\usepackage{comicsans}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amscd}
+\usepackage{amsfonts}
+\usepackage{amstext}
+\usepackage{array}%数组和表格制作
+\usepackage{caption}
+\usepackage{color}
+\usepackage{commutative-diagrams}%用CoDi包画交换图
+\usepackage{epsfig}
+\usepackage{graphicx}%插图
+\usepackage{indentfirst}%首行缩进宏包
+\usepackage{latexsym}
+\usepackage{listings}
+\usepackage{multicol}%跨列表格
+\usepackage{multirow}%跨行表格
+\usepackage{rawfonts}
+\usepackage{tabularx}%自动设置表格列宽
+\usepackage{tikz}
+\usepackage{tikz-cd}%tikzcd画交换图
+\usepackage{titletoc}%目录格式设置
+\usepackage[all]{xy}
+
+\usepackage{geometry}
+\geometry{
+a4paper,
+left = 2.5cm,
+right = 2.5cm,
+top = 3cm,
+bottom = 3cm,
+}
+\usepackage{hyperref}%超链接
+\hypersetup{colorlinks, linkcolor={blue}, citecolor={blue}} 
+\usepackage{mathrsfs}%数学花体字
+\usepackage{titlesec}
+% \renewcommand{\thesection}{\thechapter\alph{section})}
+% \titleformat{\section}[runin]{\normalfont\bfseries}{\indent\thesection\ }{0pt}{}
+\usepackage{xcolor}
+\definecolor{peach1}{rgb}{0.2902,0.5294,0.6314}%水蜜桃汽水配色1
+\definecolor{peach2}{rgb}{0.8706,0.5647,0.4824}%水蜜桃汽水配色2
+\definecolor{peach3}{rgb}{0.9020,0.7725,0.7059}%水蜜桃汽水配色3
+\definecolor{prin}{rgb}{0.4588,0.6980,0.9059}%公主配色蓝
+\definecolor{straw}{rgb}{0.7608,0.5216,0.5412}%莓果配色红
+\newcounter{acounter}[chapter]
+\numberwithin{acounter}{chapter}
+\newtheoremstyle{theo}% name
+{4pt}% Space above1
+{4pt}% Space below1
+{\normalfont }% Body font
+{}% Indent amount2
+{\color{peach1}\bfseries }% Theorem head font
+{.}% Punctuation after theorem head
+{.5em}% Space after theorem head3
+{}% Theorem head spec (can be left empty, meaning ‘normal’)
+\newtheoremstyle{defi}% name
+{4pt}% Space above1
+{4pt}% Space below1
+{\normalfont }% Body font
+{}% Indent amount2
+{\color{peach2}\bfseries }% Theorem head font
+{.}% Punctuation after theorem head
+{.5em}% Space after theorem head3
+{}% Theorem head spec (can be left empty, meaning ‘normal’)
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+\pushQED{\qed}%
+\normalfont \topsep6\p@\@plus6\p@\relax
+\trivlist
+\item\relax
+{\color{prin}\normalfont\bfseries
+#1\@addpunct{.}}\hspace\labelsep\ignorespaces
+}{%
+\popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+{\theoremstyle{theo}
+%\swapnumbers
+\newtheorem{thm}[acounter]{Theorem}%定理
+\newtheorem{prop}[acounter]{Proposition}%命题
+\newtheorem{cor}[acounter]{Corollary}%推论
+\newtheorem{lem}[acounter]{Lemma}%引理
+\newtheorem{rem}[acounter]{Remark}%注
+\newtheorem{eg}[acounter]{Example}%例
+\newtheorem{ex}[acounter]{Exercise}%习题
+}
+{\theoremstyle{defi}
+%\swapnumbers
+\newtheorem{defn}[acounter]{Definition}%定义
+}
+
+\newcommand{\tfa}[1]{{\color{peach1}\textbf{#1}}}%水蜜桃色1
+\newcommand{\tfb}[1]{{\color{peach2}\textbf{#1}}}%水蜜桃色2
+\newcommand{\tfc}[1]{{\color{peach3}\textbf{#1}}}%水蜜桃色3
+\newcommand{\tfs}[1]{{\color{straw}\textbf{#1}}}%莓果配色红
+\newcommand{\diff}{\mathrm{d}}
+
+\newcommand{\ad}{\operatorname{ad}}
+\renewcommand{\sl}{\mathrm{sl}}
+\newcommand{\gl}{\mathrm{gl}}
+\newcommand{\ima}{\operatorname{im}}
+\newcommand{\Der}{\operatorname{Der}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\End}{\operatorname{End}}
+\renewcommand{\char}{\operatorname{char}}
+\renewcommand{\span}{\operatorname{span}}
+\newcommand{\rad}{\operatorname{rad}}
+
+\usepackage{dsfont}
+\DeclareMathOperator{\id}{\mathds{1}}
+
+\usepackage[inline]{enumitem}
+
+\renewcommand{\proofname}{Proof}%
+\renewcommand{\bibname}{Bibliography}%
+\renewcommand{\contentsname}{Contents}%
+
+\title{\textbf{Notes on Lie Algebra}}
+\author{Tom}
+\date{\today}
+
+\everymath{\displaystyle}
+
+\begin{document}
+\frontmatter
+\maketitle
+\tableofcontents
+\mainmatter
+\include{chapter1}
+\include{chapter2}
+\include{chapter3}
+% \include{chapter4}
+\backmatter
+%\nocite{*}
+\bibliographystyle{alpha}
+\bibliography{reference}
+\end{document}

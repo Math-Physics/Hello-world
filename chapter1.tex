@@ -1,0 +1,299 @@
+\chapter{Introduction}
+
+Some of the notes come from the lectures given by Professor Chongying Dong in the summer school of Xiamen University in 2019. Other references of the notes are \cite{Humphreys_Lie_alg,Intro_to_Lie_alg}. Most notations in this notes are consistent with \cite{Intro_to_Lie_alg}.
+
+Our goal is to classify all the finite-dimensional complex semisimple Lie algebras up to isomorphism. Unless otherwise stated, all the Lie algebras we discuss are finite-dimensional.
+
+\section{Basic Concepts}
+
+In this section we introduce some basic concepts about Lie algebras and their ideals. We will omit some easy proofs.
+
+\begin{defn}
+    A \tfs{Lie algebra} $L$ is a vector space over a field $F$ with a bilinear product $L\times L\to L$, $(x,y)\mapsto [x,y]$, called the Lie bracket, satisfying the following properties:
+    \begin{enumerate}
+        \item $[x,x]=0$, $\forall x\in L$;
+        \item $[x,[y,z]]+[y,[z,x]]+[z,[x,y]]=0$, $\forall x,y,z\in L$, called the \tfs{Jacobi identity}.
+    \end{enumerate}
+\end{defn}
+
+\begin{rem}
+    The condition 1 implies $[x,y]=-[y,x]$, $\forall x,y\in L$, and the converse is also true when $\char F\neq 2$.
+\end{rem}
+
+\begin{defn}
+    A \tfs{Lie subalgebra} $K$ of a given Lie algebra $L$ is a vector subspace of $L$ such that $[x,y]\in K$ for all $x,y\in K$.
+\end{defn}
+
+Here are some examples of Lie algebras.
+\begin{enumerate}
+    \item Let $\gl(n,F):=M_{n\times n}(F)$ be the vector space of all $n\times n$ matrices over the field $F$ with the Lie bracket defined by $[x,y]:=xy-yx$, where $xy$ is the usual product of matrices $x$ and $y$. Then $\gl(n,F)$ is a Lie algebra, called the \tfs{general linear algebra}.
+    \item Let $V$ be a vector space over a field $F$. Then $\gl(V):=\operatorname{End}(V)$ with the Lie bracket $[x,y]:=x\circ y-y\circ x$ for $x,y\in\gl(V)$ is a Lie algebra, also known as the \tfs{general linear algebra}.
+    \item Let $V$ be a vector space with the Lie bracket defined by $[x,y]=0$ for all $x,y\in L$. Then this is an \tfs{abelian} Lie algebra structure on $V$.
+    \item Let $\sl(n,F)$ be the subspace of $\gl(n,F)$ consisting of all matrices of trace 0. Then $\sl(n,F)$ is a Lie algebra with the same Lie bracket as $\gl(n,F)$, called the \tfs{special linear algebra}.
+    \item Let $\mathrm{b}(n,F)$ be the upper triangular matrices in $\gl(n,F)$. Then $\mathrm{b}(n,F)$ is a Lie algebra with the same Lie bracket as $\gl(n,F)$.
+    \item Similarly, let $\mathrm{n}(n,F)$ be the strictly upper triangular matrices in $\gl(n,F)$. Then $\mathrm{n}(n,F)$ is a Lie algebra with the same Lie bracket as $\gl(n,F)$.
+    \item Let $A$ be an algebra over a field $F$ (i.e. $A$ is both a ring and a vector space over $F$). Let
+    \[
+        \Der(A):=\{ D\in\operatorname{End}(A):D(ab)=D(a)b+aD(b) \mbox{ for all } a,b\in A \}.
+    \]
+    Any element in $\Der(A)$ is called a \tfs{derivation} of $A$. We can verify that if $D,E\in\Der A$, then $[D,E]=D\circ E-E\circ D \in \Der A$ (but $D \circ E$ may not be a derivation). Then $\Der(A)$ is a Lie subalgebra of $\gl(A)$.
+\end{enumerate}
+
+
+\begin{defn}
+    Let $L$ be a Lie algebra. An \tfs{ideal} of $L$ is a subspace $I$ of $L$ such that $[x,y]\in L$ for all $x\in I,y\in L$ (or equivalently, for all $x\in L,y\in I$).
+\end{defn}
+
+An ideal is always a subalgebra, but a subalgebra need not be an ideal. For example, $\mathrm{b}(n,F)$ is a subalgebra of $\gl(n,F)$ but not an ideal when $n\geq 2$.
+
+The Lie algebra $L$ itself is an ideal of $L$, and $\{0\}$ is an ideal of $L$. They are called the \tfs{trivial ideals} of $L$. Another example of an ideal is the \tfs{center} $Z(L)$ of $L$, defined by 
+\[
+    Z(L):=\{x\in L:[x,y]=0 \mbox{ for all } y\in L\}.
+\]
+Clearly $Z(L)=L$ if and only if $L$ is abelian.
+
+Now we introduce the definition of homomorphisms between Lie algebras.
+\begin{defn}
+    Let $L_1$, $L_2$ be two Lie algebras over a field $F$. We say a map $\varphi:L_1\to L_2$ is a \tfs{homomorphism}, if $\varphi$ is a linear map, and 
+    \[
+        \varphi([x,y])=[\varphi(x),\varphi(y)],\quad \forall x,y\in L.
+    \]
+    Notice that the first Lie bracket is taken in $L_1$ and the second is taken in $L_2$. We say $\varphi$ is an \tfs{isomorphism} if $\varphi$ is also bijective.
+\end{defn}
+
+An extremely important homomorphism is the \tfs{adjoint homomorphism}. If $L$ is a Lie algebra, then we define 
+\[
+    \ad:L\to \gl(L)
+\]
+by $(\ad x)(y):=[x,y]$ for $x,y\in L$. Clearly $\ad$ is a linear map, and by Jacobi identity we can check that
+\[
+    \ad([x,y])=\ad x\circ \ad y-\ad y\circ \ad x=[\ad x,\ad y].
+\]
+Hence $\ad:L\to \gl(L)$ is a Lie algebra homomorphism. Its kernel is $Z(L)$.
+
+\begin{prop}
+    If $\varphi : L_1\to L_2$ is a Lie algebra homomorphism, then $\ker \varphi$ is an ideal and $\ima \varphi$ is a subalgebra.
+\end{prop}
+
+\begin{proof}
+    This is easy to verify.
+\end{proof}
+
+If $I,J$ are ideals of the Lie algebra $L$, then their intersection $I\cap J$, their sum $I+J:=\{x+y:x\in I,y\in J\}$ and their Lie bracket $[I,J]:=\operatorname{Span}\{[x,y]:x\in I,y\in J\}$ are ideals of $L$.
+
+\begin{rem}
+    It is necessary to define $[I,J]$ to be the \tfs{span} of commutators $[x,y]$ rather than just the \tfs{set} of commutators. Sometimes the set of commutators is not an ideal. See \cite[Exercise 2.14]{Intro_to_Lie_alg} for an example.
+\end{rem}
+
+We write $L':=[L,L]$, called the \tfs{derived algebra} of $L$.
+
+If $I$ is an ideal of the Lie algebra $L$, then the cosets $z+I=\{z+x:x\in I\}$ for $z\in L$ form a quotient vector space $L/I=\{z+I:z\in L\}$. A Lie bracket on $L/I$ can be defined by $[w+I,z+I]:=[w,z]+I$ for $w,z\in L$. We can verify that the Lie bracket on $L/I$ is well-defined, which makes $L/I$ a Lie algebra, called the \tfs{quotient algebra} of $L$ by $I$.
+
+
+\begin{thm}
+    We have some isomorphism theorems for Lie algebras:
+    \begin{enumerate}
+        \item If $\varphi:L_1\to L_2$ is a homomorphism of Lie algebras, then 
+        \[
+            L_1/\ker \varphi\cong \ima \varphi.
+        \]
+        \item If $I$ and $J$ are ideals of a Lie algebra, then $(I+J)/J\cong I/(I\cap J)$.
+        \item If $I$ and $J$ are ideals of a Lie algebra $L$ and $I\subset J$, then $J/I$ is an ideal of $L/I$ and $(L/I)/(J/I)\cong L/J$.
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+    This is easy to verify.
+\end{proof}
+
+\begin{eg}
+    Fix a field $F$ and consider the linear map $\operatorname{tr}:\gl (n,F)\to F$, which sends a matrix to its trace. It is easy to see that $\tr$ is a surjective Lie algebra homomorphism, and $\ker\tr =\sl(n,F)$. Then $\gl(n,F)/\sl(n,F)\cong F$.
+\end{eg}
+
+\begin{eg}
+    Recall that for a Lie algebra $L$, the kernel of the adjoint homomorphism $\ad:L\to \gl (L)$ is the center $Z(L)$. If we denote $\ad L:=\ima \ad$, then $L/Z(L)\cong \ad L$, which is a Lie subalgebra of $\gl(L)$.
+\end{eg}
+
+Let $I$ be an ideal of the Lie algebra $L$. There is a bijective correspondence between the ideals of $L/I$ and the ideals of $L$ containing $I$. If $J$ is an ideal of $L$ that contains $I$, then $J/I$ is an ideal of $L/I$. Conversely, if $K$ is an ideal of $L/I$, then $J:=\{z\in L:z+I\in K\}$ is an ideal of $L$ that contains $I$.
+
+For two Lie algebras $L_1,L_2$, we define their \tfs{direct sum} $L_1\oplus L_2:=\{(x_1,x_2):x_i\in L_i\}$ to be the direct sum of their underlying vector spaces with the Lie bracket defined by 
+\[
+    [(x_1,x_2),(y_1,y_2)]:=([x_1,y_1],[x_2,y_2]).
+\] 
+Then $L_1\oplus L_2$ is a Lie algebra.
+
+Next we introduce the notion of solvable and nilpotent Lie algebras. 
+
+\begin{lem}
+    If $I$ is an ideal of the Lie algebra $L$. Then $L/I$ is abelian if and only if $I$ contains the derived algebra $L'$.
+\end{lem}
+
+\begin{proof}
+    Clear.
+\end{proof}
+
+This lemma tells us that the derived algebra is the smallest ideal of $L$ with an abelian quotient. We define the derived series of $L$ to be the series with terms
+\[
+    L^{(1)}=L' \quad \mbox{and} \quad L^{(k)}=[L^{(k-1)},L^{(k-1)}] \mbox{ for } k\geq 2.
+\]
+
+Then $L\supset L^{(1)}\supset L^{(2)}\supset\cdots$. Each $L^{(k)}$ is an ideal of $L$.
+
+\begin{defn}
+    A Lie algebra $L$ is called \tfs{solvable} if for some $m\geq 1$ we have $L^{(m)}=0$.
+\end{defn}
+
+\begin{lem}
+    Let $L$ be a Lie algebra.
+    \begin{enumerate}
+        \item If $L$ is solvable, then every subalgebra and every homomorphic image of $L$ are solvable.
+        \item If $I$ is an ideal of $L$ such that both $I$ and $L/I$ are solvable, then $L$ is solvable.
+        \item If $I$ and $J$ are solvable ideals of $L$, then $I+J$ is also a solvable ideal of $L$.
+    \end{enumerate}
+\end{lem}
+
+\begin{proof}
+    This is easy to verify.
+\end{proof}
+
+\begin{cor}
+    Let $L$ be a finite dimensional Lie algebra. Then there exists a unique maximal solvable ideal containing every solvable ideal.
+\end{cor}
+
+\begin{proof}
+    Let $R$ be a solvable ideal of $L$ with the largest possible dimension. Then for every solvable ideal $I$ of $L$, $R+I$ is also a solvable ideal, and $\dim (R+I)\geq\dim R$. Hence $R+I=R$, so $I\subset R$.
+\end{proof}
+
+The unique maximal solvable ideal above is called the \tfs{radical} of $L$, and is denoted by $\rad L$.
+
+\begin{defn}
+    A non-zero finite dimensional Lie algebra $L$ is called \tfs{semisimple} if $\rad L=0$.
+\end{defn}
+
+\begin{prop}
+    A Lie algebra is semisimple if and only if every abelian ideal is 0. (Recall that an ideal $I$ of a Lie algebra is called abelian if $[I,I]=0$.)
+\end{prop}
+
+\begin{proof}
+    Easy.
+\end{proof}
+
+\begin{defn}
+    A finite dimensional Lie algebra $L$ is called \tfs{simple} if it has no ideals other than 0 and $L$, and $L$ is not abelian.
+\end{defn}
+
+\begin{rem}
+    Clearly simple Lie algebras are semisimple. The requirement that A simple Lie algebra should not be abelian is to remove the 1-dimensional Lie algebra.
+\end{rem}
+
+We will see later that every semisimple Lie algebra is a direct sum of simple Lie algebras, which justifies the name \tfs{semi}simple.
+
+\begin{lem}
+    If $L$ is a Lie algebra, then $L/\rad L$ is semisimple.
+\end{lem}
+
+\begin{proof}
+    Easy.
+\end{proof}
+
+This lemma tells us that if we want to understand finite dimensional Lie algebras, it is necessary to understand solvable Lie algebras and semisimple Lie algebras.
+
+Next we introduce the definition of a nilpotent Lie algebra, which is also a very important kind of Lie algebras.
+
+\begin{defn}
+    Let $L$ be a Lie algebra. The lower central series of $L$ is defined to be the series with terms 
+    \[
+        L^{1}=L' \quad \mbox{and} \quad L^{k}=[L,L^{k-1}] \mbox{ for } k\geq 2.
+    \]
+    Then $L\supset L^{1}\supset L^{2}\supset\cdots$. $L$ is called \tfs{nilpotent} if for some $m\geq 1$ we have $L^m=0$.
+\end{defn}
+
+Clearly, nilpotent Lie algebras are solvable, but solvable Lie algebras may not be nilpotent.
+
+\begin{prop}\label{adL_nilpotent_iff_L_is}
+    Let $L$ be a Lie algebra.
+    \begin{enumerate}
+        \item If $L$ is nilpotent, then every subalgebra of $L$ is nilpotent.
+        \item $L$ is nilpotent if and only if $\ad L\cong L/Z(L)$ is nilpotent.
+    \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    Easy.
+\end{proof}
+
+\section{A Little Representation Theory}
+
+Let $L$ be a Lie algebra over a field $F$. A \tfs{representation} of $L$ is a Lie algebra homomorphism $\varphi:L\to \gl(V)$, where $V$ is a finite-dimensional vector space over $F$. If we fix a basis of $V$, then we obtain a homomorphism $L\to \gl(n,F)$, called the matrix representation of $L$. If $\ker \varphi=0$, then the representation is said to be faithful.
+
+\begin{eg}
+    The \tfs{adjoint representation} of a Lie algebra $L$ is 
+    \[
+        \ad:L\to \gl(L),\quad x\mapsto \ad x.
+    \]
+    The kernel of the adjoint representation is $Z(L)$.
+\end{eg}
+
+\begin{defn}
+    Suppose $L$ is a Lie algebra over a field $F$. An $L$-\tfs{module} is a finite-dimensional $F$-vector space $V$, together with a map 
+    \[
+        L\times V\to V,\quad (x,v)\mapsto x \cdot v
+    \]
+    satisfying the following properties:
+    \[
+        (\lambda x+\mu y)\cdot v=\lambda(x\cdot v)+\mu(y\cdot v),\eqno(1)
+    \]
+    \[
+        x\cdot (\lambda v+\mu w)=\lambda(x\cdot v)+\mu(x\cdot w),\eqno(2)
+    \]
+    \[
+        [x,y]\cdot v=x\cdot (y\cdot v)-y\cdot (x\cdot v),\eqno(3)
+    \]
+    for all $x,y\in L$, $v,w\in V$, and $\lambda,\mu\in F$.
+\end{defn}
+
+The representations of a Lie algebra $L$ and $L$-modules are two different ways to describe the same structures.
+
+Let $L$ be a Lie algebra. Suppose $V$ is an $L$-module. A \tfs{submodule} $W$ of $V$ is a subspace of $V$ which is invariant under the action of $L$. 
+
+\begin{eg}
+    A Lie algebra $L$ can be viewed as an $L$-module via the adjoint representation. Then the submodules of $L$ are exactly the ideals of $L$.
+\end{eg}
+
+If $W$ is a submodule of the $L$-module $V$, then the quotient space $V/W$ is naturally an $L$-module, called the \tfs{quotient module}.
+
+Now we introduce the homomorphism between $L$-modules. Suppose $V,W$ are $L$-modules. An $L$-module \tfs{homomorphism} from $V$ to $W$ is a linear map $\theta:V\to W$ which commutes with the action of $L$. We say $\theta$ is an \tfs{isomorphism} if it is bijective.
+
+The classical isomorphism theorems for usual modules (over a ring) also hold for $L$-modules.
+
+Let $V$ be an $L$-module. We say $V$ is \tfs{irreducible} if it is non-zero and has no submodules other than 0 and $V$. We say $V$ is \tfs{indecomposable} if $V$ cannot be written as the direct sum of two non-zero submodules. We say $V$ is \tfs{completely reducible} if $V$ can be written as the direct sum of some irreducible submodules.
+
+\begin{lem}[Schur's Lemma]
+    Let $L$ be a complex Lie algebra. If $S$ is a finite-dimensional irreducible $L$-module, then every $L$-module homomorphism $\theta:S\to S$ is a scalar multiple of the identity transformation, i.e. $\theta=\lambda\cdot\id_S$ for some $\lambda\in\mathbb{C}$.
+\end{lem}
+
+\begin{proof}
+    Note that $\theta$ must have an eigenvalue, say $\lambda$. Then $\ker (\theta-\lambda\cdot\id_S)$ is a non-zero submodule of $S$, which must be the whole $S$. This completes the proof.
+\end{proof}
+
+\begin{thm}[Weyl's Theorem]\label{weyl's_thm}
+    Let $L$ be a complex semisimple Lie algebra. Then every irreducible representation of $L$ is completely reducible.
+\end{thm}
+
+\begin{proof}
+    See \cite[Appendix B]{Intro_to_Lie_alg} or \cite[p. 28]{Humphreys_Lie_alg}.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

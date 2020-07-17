@@ -1,0 +1,338 @@
+\chapter{Some Basic Theorems}
+We have shown that for any finite-dimensional Lie algebra $L$, its radical $\rad L$ is solvable, and the quotient $L/\rad L$ is semisimple. So from now on, we mainly focus on solvable Lie algebras and semisimple Lie algebras.
+
+To understand a Lie algebra $L$, we usually consider its representation, i.e. a Lie algebra homomorphism $L\to \gl(V)$ for some vector space $V$. If the representation is faithful, then no information about $L$ will be lost. So we usually assume that $L$ is a subalgebra of $\gl(V)$ for some vector space $V$. Although it is a theorem (Ado's Theorem) that every Lie algebra has a faithful representation, we shall not prove it.
+
+\section{Engel's Theorem}
+
+Engel's Theorem is the first non-trivial theorem that we will come across. It is a very useful tool in the study of Lie algebras.
+
+\begin{thm}[Engel's Theorem]
+    Let $V$ be a finite-dimensional vector space. Suppose that $L$ is a Lie subalgebra of $\gl(V)$ such that every element of $L$ is a nilpotent transformation of $V$. Then there exists a basis of $V$ in which every element of $L$ is represented by a strictly upper triangular matrix.
+\end{thm}
+
+Our strategy to prove Engel's Theorem is to find a vector $v\in V$ such that $x(v)=0$ for all $x\in L$, and then use induction on $\dim V$.
+
+\begin{lem}\label{ad_is_nilpotent}
+    Suppose that $L$ is a Lie subalgebra of $\gl(V)$. If $x\in V$ such that the linear map $x:V\to V$ is nilpotent, then $\ad x:L\to L$ is also nilpotent.
+\end{lem}
+
+\begin{proof}
+    Easy.
+\end{proof}
+
+\begin{lem}\label{invariance_lemma_0}
+    Suppose that $A$ is an ideal of a Lie subalgebra $L$ of $\gl(V)$. Let 
+    \[
+        W=\{v\in V:a(v)=0,\;\forall a\in A\}.
+    \]
+    Then $W$ is an $L$-invariant subspace of $V$.
+\end{lem}
+
+\begin{proof}
+    For any $v\in W$, $x\in L$ and $a\in A$, since $A$ is an ideal of $L$, we have $[a,x]\in A$. Thus $a(x(v))=x(a(v))+[a,x](v)=0$. Hence $x(v)\in W$.
+\end{proof}
+
+\begin{lem}\label{common_zero_eigenvector}
+    Suppose that $L$ is a Lie subalgebra of $\gl(V)$, where $V$ is a non-zero finite-dimensional vector space. If every element of $L$ is a nilpotent transformation of $V$, then there is some non-zero $v\in V$ such that $x(v)=0$ for all $x\in L$.
+\end{lem}
+
+\begin{proof}
+    Use induction on $\dim L$. If $\dim L=1$, then the conclusion is trivial. Now suppose $\dim L>1$. 
+    
+    We take a maximal Lie subalgebra $A$ of $L$ with $\dim A<\dim L$. We claim that $A$ is an ideal of $L$ and $\dim A=\dim L-1$. Consider the quotient space $L/A$. We define a linear map $\varphi:A\to \gl(L/A)$, $ \varphi(a)(x+A)=[a,x]+A$ for $x\in L$. Verify that $\varphi$ is well-defined and is a Lie algebra homomorphism. Since $a:V\to V$ is nilpotent, by Lemma \ref{ad_is_nilpotent}, $\ad a:L\to L$ is nilpotent, and therefore $\varphi(a)$ is as well. By the inductive hypothesis, there is some non-zero element $y+A\in L/A$ such that $\varphi(a)(y+A)=0$ for all $a\in A$. Hence $[a,y]\in A$ for all $a\in A$. Thus $A\oplus \span\{y\}$ is a Lie subalgebra of $L$. By the maximality of $A$, we have $L=A\oplus\span\{y\}$, and $A$ is an ideal of $L$.
+
+    Now we apply the inductive hypothesis to $A$. Thus there is some non-zero $w\in V$ such that $a(w)=0$ for all $a\in A$. Let $W=\{v\in V:a(v)=0,\;\forall a\in A\}$. Then by Lemma \ref{invariance_lemma_0}, $W$ is $L$-invariant. Hence $y(W)\subset W$. Clearly $y|_W$ is nilpotent, so there exists some non-zero $v\in W$ such that $y(v)=0$. Since $L=A\oplus\span\{y\}$, we know that $x(v)=0$ for all $x\in L$.
+\end{proof}
+
+\begin{proof}[Proof of Engel's Theorem]
+    We use induction on $n=\dim V$. If $n=1$, then the conclusion is trivial. Now suppose $n>1$. By Lemma \ref{common_zero_eigenvector}, there is a non-zero $v\in V$ such that $x(v)=0$ for all $x\in L$. Let $U$ be the quotient space $V/\span\{v\}$. Any $x\in L$ induces a linear transformation $\bar{x}:U\to U$. Clearly $L\to \gl(U)$ given by $x\mapsto \bar{x}$ is a Lie algebra homomorphism. 
+
+    The image of this homomorphism is a Lie subalgebra of $\gl(U)$, so by the inductive hypothesis there is a basis $\{\bar{v}_1,\ldots,\bar{v}_{n-1}\}$ of $U$ in which the matrices of all $\bar{x}$ are strictly upper triangular. Let $v_i\in V$ be a representative of $\bar{v}_i\in U$, $i=1,2,\ldots,n-1$. Then $\{v,v_1,\ldots,v_{n-1}\}$ is a basis of $V$ in which the matrices of all $x\in L$ are strictly upper triangular.
+\end{proof}
+
+\begin{thm}[Engel's Theorem, 2nd version]
+    A Lie algebra $L$ is nilpotent if and only if for every $x\in L$, the linear map $\ad x:L\to L$ is nilpotent.
+\end{thm}
+
+\begin{proof}
+    The "only if" direction is easy. For the "if" direction, consider the adjoint homomorphism $\ad:L\to \ad L\subset \gl(L)$. By the original version of Engel's Theorem, there is a basis of $L$ in which every $\ad x:L\to L$ is represented by a strictly upper triangular matrix. It follows directly that $\ad L$ is nilpotent, so $L$ is nilpotent by Proposition \ref{adL_nilpotent_iff_L_is}.
+\end{proof}
+
+\begin{rem}
+    Note that Engel's Theorem does \tfs{not} tell us that a Lie algebra $L$ is nilpotent if and only if every element of $L$ is a nilpotent linear transformation of $V$. The "only if" direction is false. For a counterexample, consider the 1-dimensional Lie subalgebra $\span \{\id_V\}$ of $\gl(V)$. 
+\end{rem}
+
+\section{Lie's Theorem}
+
+\begin{thm}[Lie's Theorem]
+    Let $V$ be a finite-dimensional complex vector space. If $L$ is a solvable Lie algebra of $\gl(V)$, then there exists a basis of $V$ in which every element of $L$ is represented by an upper triangular matrix.
+\end{thm}
+
+Note that the Lie algebra $\mathrm{b}(n,F)$ of upper triangular matrices is clearly solvable, so we require that $L$ is solvable in the hypothesis of Lie's Theorem.
+
+Similar to the proof of Engel's Theorem, our strategy to prove Lie's Theorem is to find a common eigenvector $v\in V$ of all $x\in L$, and then use induction on $\dim V$.
+
+\begin{defn}
+    A \tfs{weight} for a Lie algebra $L$ of $\gl(V)$ is a linear map $\lambda:L\to F$ such that 
+    \[
+        V_\lambda:=\{v\in V:x(v)=\lambda(x)v,\;\forall x\in L\}
+    \]
+    is a non-zero subspace of $V$. The vector space $V_\lambda$ is called the \tfs{weight space} associated to the weight $\lambda$. 
+\end{defn}
+
+\begin{lem}[Invariance Lemma]\label{invariance_lemma}
+    Assume that $F$ is a field with characteristic 0, and $V$ is a finite-dimensional vector field over $F$. Let $L$ be a Lie subalgebra of $\gl(V)$ and let $A$ be an ideal of $L$. Let $\lambda:A\to F$ be a weight of $A$. Then the weight space 
+    \[
+        V_\lambda=\{v\in V:a(v)=\lambda(a)v,\; \forall a\in A\}
+    \]
+    is an $L$-invariant subspace of $V$.
+\end{lem}
+
+\begin{proof}
+    For every $w\in V_\lambda$, $y\in L$ and $a\in A$, we need to show that $a(y(w))=\lambda(a)y(w)$. Since $a(y(w))=y(a(w))+[a,y](w)=\lambda(a)y(w)+\lambda([a,y])(w)$, we need to show that $\lambda([a,y])=0$.
+
+    For any $0\neq w\in V_\lambda$, consider the subspace $U:=\{w,y(w),y^2 (w),\ldots\}$ of $V$. Clearly $U$ is $y$-invariant. We claim that $\forall z\in A$, the subspace $U$ is $z$-invariant.
+
+    Let $m\geq 1$ such that $\{w,y(w),\ldots,y^{m-1}(w)\}$ is a basis of $U$. Note that $z(w)=\lambda(z)w$, and $z(y(w))=y(z(w))+[z,y](w)=\lambda(z)y(w)+\lambda([z,y])(w)$. More generally, for $k\geq 1$, we have $z(y^{k}(w))=y(z(y^{k-1}(w)))+[z,y](y^{k-1}(w))$. By induction, it is easy to see that $U$ is $z$-invariant, and the matrix of $z|_U$ with respect to the basis $\{w,y(w),\ldots,y^{m-1}(w)\}$ is the upper triangular matrix 
+    \[
+        \left(
+            \begin{array}{cccc}
+                \lambda(z)    & * & \cdots & *  \\
+                0 & \lambda(z) & \cdots & *           \\
+                \vdots & \vdots & \ddots & \vdots \\
+                0 & 0 & \cdots & \lambda(z)
+            \end{array}
+        \right)
+    \]
+    In particular, the trace of $z|_U$ is $m\lambda(z)$. Take $z=[a,y]$. Since $[a,y]|_U=a|_U y|_U -y|_U a|_U$, we know that $\tr ([a,y]|_U)=0$. But $\tr([a,y]|_U)=m\lambda([a,y])$. So $m\lambda([a,y])=0$. Since $\char F=0$, we have $\lambda([a,y])=0$, completing the proof.
+\end{proof}
+
+Now we prove Lie's Theorem.
+
+\begin{proof}[Proof of Lie's Theorem]
+    First, we claim that there exists a non-zero vector $v\in V$ such that $v$ is a common eigenvector for all $x\in L$. 
+
+    We use induction on $\dim L$. The case where $\dim L=1$ is trivial. Now assume $\dim L>1$. Since $L$ is solvable, we know that $L'$ is properly contained in $L$. So we may find a subspace $A$ of $L$ such that $A$ contains $L'$, and $L=A\oplus \span\{z\}$ for some $0\neq z\in L$. Clearly $A$ is an ideal of $L$, and $A$ is solvable. Thus by inductive hypothesis, there exists a non-zero $w\in V$ such that $w$ is a common eigenvector for all $a\in A$. Let $\lambda:A\to\mathbb{C}$ be the corresponding weight and let $V_\lambda$ be its weight space. Then by Lemma \ref{invariance_lemma}, $V_\lambda$ is $L$-invariant. Hence there exists a non-zero $v\in V_\lambda$ which is an eigenvector of $z$, and thus $v$ is a common eigenvector for all $x\in L$.
+
+    The remainder of the proof of Lie's Theorem is analogous to the proof of Engel's Theorem, which uses induction on $\dim V$, so we leave this to the reader.
+\end{proof}
+
+\section{Cartan's Criteria}
+
+From now on, we only consider finite-dimensional complex vector spaces. We recall the Jordan decomposition of a linear transformation of a finite-dimensional complex vector space. The proof can be easily found in many textbooks on linear algebra.
+\begin{lem}[Jordan decomposition]
+    Let $x$ be a linear transformation of a finite-dimensional complex vector space $V$. Then there is a unique expression of $x$ as a sum $x=d+n$, where $d:V\to V$ is diagonalizable, $n:V\to V$ is nilpotent, and $d$ and $n$ commute. Moreover, there are polynomials $p(X),q(X)\in\mathbb{C}[X]$ without constant term, such that $d=p(x)$ and $n=q(x)$.
+\end{lem}
+
+\begin{cor}
+    Let $V$ be a vector space. Suppose that $x\in\gl(V)$ has Jordan decomposition $d+n$. Then $\ad x=\ad d+\ad n$ is the Jordan decomposition of $\ad x:\gl(V) \to \gl(V)$.
+\end{cor}
+
+\begin{proof}
+    This follows from the uniqueness of the Jordan decomposition.
+\end{proof}
+
+Let $L$ be a solvable Lie subalgebra of $\gl(V)$. What does the solvability tell us? The next proposition gives us an indication.
+
+\begin{prop}\label{solvable_subalgebra_tr}
+    Let $L$ be a Lie subalgebra of $\gl(V)$. Suppose that $L$ is solvable. Then there exists a basis of $L$ in which every element of $L'$ is represented by a strictly upper triangular matrix. Moreover, $\tr (xy)=0$ for all $x\in L$ and $y\in L'$.
+\end{prop}
+
+\begin{proof}
+    This follows from Lie's Theorem.
+\end{proof}
+
+If $L$ is solvable, then by the proposition above, we can get some information about trace. Conversely, information about trace can also test the solvability of $L$. We have the following proposition:
+
+\begin{prop}\label{tr_L_solvable}
+    Let $L$ be a Lie subalgebra of $\gl(V)$. Suppose that $\tr(xy)=0$ for all $x,y\in L$. Then $L$ is solvable.
+\end{prop}
+
+\begin{proof}
+    To show that $L$ is solvable, it suffices to show that every element of $L'$ is a nilpotent linear transformation of $V$. It will then follow by Engel's Theorem that $L'$ is nilpotent, so $L$ is solvable.
+
+    Take any $x\in L'$. Then $x$ has the Jordan decomposition $d+n$, where $d$ is diagonalizable, $n$ is nilpotent, and $[d,n]=0$. We may fix a basis of $V$ in which $d$ is diagonal and $n$ is upper triangular. Suppose that the diagonal entries of $d$ are $\lambda_1,\ldots,\lambda_m$. Our aim is to show that $d=0$, so it suffices to show that $\sum_{i=1}^{m}\lambda_i\bar\lambda_i=0$.
+
+    Let $\bar{d}$ be the linear transformation on $V$ such that it is diagonal in this basis with diagonal entries $\bar{\lambda}_1,\ldots,\bar{\lambda}_m$. Then by direct computation we have $\tr(\bar{d}x)=\sum_{i=1}^{m}\lambda_i\bar\lambda_i$. Since $x\in L'$, we know that $x$ is a linear combination of commutators in $L$. So we need to show that $\tr(\bar{d}[y,z])=0$ for all $y,z\in L$. Note that $\tr(\bar{d}[y,z])=\tr([\bar{d},y]z)$. By our hypothesis, it suffices to show that $[\bar{d},y]\in L$ for all $y\in L$, i.e. $\ad \bar{d}:\gl(V)\to \gl(V)$ maps $L$ into $L$. 
+
+    Note that the Jordan decomposition of $\ad x:\gl(V)\to \gl(V)$ is $\ad d+\ad n$. Hence there exists a polynomial $p(X)\in\mathbb{C}[X]$ such that $\ad d=p(\ad x)$. It follows from Lagrange interpolation that $\ad \bar{d}$ is a polynomial of $\ad d$. Since $\ad x$ maps $L$ into $L$, we know that $\ad \bar{d}$ maps $L$ into $L$.
+\end{proof}
+
+\begin{thm}\label{Cartan_1st_cri}
+    Let $L$ be a complex Lie algebra. Then $L$ is solvable if and only if $\tr(\ad x \circ \ad y)=0$ for all $x\in L$ and $y\in L'$.
+\end{thm}
+
+\begin{proof}
+    Suppose that $L$ is solvable. Then $\ad L\subset \gl(L)$ is a solvable Lie subalgebra of $\gl(L)$. By Proposition \ref{solvable_subalgebra_tr}, we have $\tr(\ad x \circ \ad y)=0$ for all $x\in L,y\in L'$. 
+
+    Conversely, if $\tr(\ad x \circ \ad y)=0$ for all $x\in L$ and $y\in L'$, then by Proposition \ref{tr_L_solvable}, $\ad L'=\{\ad y\in\ad L:y\in L'\}$ is solvable. Since $\ad L'\cong L'/(Z(L)\cap L')$, we know that $L'$ is solvable, and hence $L$ is solvable.
+\end{proof}
+
+Now we define the \tfs{Killing form} on a complex Lie algebra $L$. The Killing form on $L$ is a symmetric bilinear form, defined by 
+\[
+    \kappa(x,y):=\tr(\ad x\circ \ad y)\quad \mbox{for }x,y\in L.
+\]
+It is easy to verify that $\kappa(x,y)$ is indeed a symmetric bilinear form on $L$. The Killing form has one important property, called associativity. That is, for all $x,y,z\in L$, we have $\kappa([x,y],z)=\kappa(x,[y,z])$. This follows from the identity $\tr([x,y]\circ z)=\tr(x\circ [y,z])$ for $x,y,z\in\gl(V)$.
+
+Using the Killing form, we can restate Theorem \ref{Cartan_1st_cri} as follows:
+\begin{thm}[Cartan's First Criterion]
+    A complex Lie algebra $L$ is solvable if and only if $\kappa(x,y)=0$ for all $x\in L$ and $y\in L'$.
+\end{thm}
+
+Suppose that $L$ is a complex Lie algebra with Killing form $\kappa$. If $I$ is an ideal of $L$, then $I$ itself has a Killing form $\kappa_I$. We show that $\kappa_I$ is equal to the restriction of the Killing form $\kappa$ to $I$.
+
+\begin{lem}
+    If $x,y\in I$, then $\kappa_I(x,y)=\kappa(x,y)$.
+\end{lem}
+
+\begin{proof}
+    Take a basis of $I$ and extend it to a basis of $L$. Then the matrix of $\ad x:L\to L$ in this basis has the form
+    \[
+        \left(
+            \begin{array}{cc}
+                A_x   &   B_x  \\
+                0     &   0        
+            \end{array}
+        \right),
+    \]
+    where $A_x$ is the matrix of $(\ad x)|_I:I\to I$ with respect to the basis of $I$. Hence the matrix of $\ad x\circ \ad y:L\to L$ in this basis of $L$ is 
+    \[
+        \left(
+            \begin{array}{cc}
+                A_x A_y   &   A_x B_y \\
+                0     &   0        
+            \end{array}
+        \right).
+    \]
+    Thus $\kappa(x,y)=\tr (\ad x\circ \ad y)=\tr(A_x A_y)=\kappa_I(x,y)$.
+\end{proof}
+
+Next, we introduce Cartan's Second Criterion, which tests whether a complex Lie algebra is semisimple. Recall that a Lie algebra is called semisimple if it has no solvable ideals except 0. Since we can detect the solvability of a Lie algebra by using Killing form, we believe that we can also use the Killing form to test whether a Lie algebra is semisimple.
+
+Let $\beta$ be a symmetric bilinear form on a finite-dimensional complex vector space $V$. For any subset $S$ of $V$, we define the perpendicular space of $S$ to be 
+\[
+    S^\perp := \{ v\in V : \beta(v,s)=0,\;\forall s\in S \}.
+\]
+Clearly $S^\perp$ is a subspace of $V$. If $V^\perp=0$, then we say that $\beta$ is \tfs{non-degenerate}. 
+
+If $\beta$ is non-degenerate, then for any subspace $W$ of $V$, by rank-nullity theorem in linear algebra, we have 
+\[
+    \dim W+\dim W^\perp =\dim V.
+\]
+
+\begin{lem}
+    Let $L$ be a Lie algebra, and let $I$ be an ideal of $L$. Then $I^\perp$ is also an ideal of $L$. 
+\end{lem}
+
+\begin{proof}
+    Easy.
+\end{proof}
+
+\begin{thm}[Cartan's Second Criterion]
+    A complex Lie algebra $L$ is semisimple if and only if its Killing form $\kappa$ is non-degenerate.
+\end{thm}
+
+\begin{proof}
+    Suppose that $L$ is semisimple. Note that $L^\perp$ is an ideal of $L$. By Cartan's First Criterion, we find that $L^\perp$ is solvable. Hence $L^\perp=0$, which means $\kappa$ is non-degenerate.
+
+    Conversely, if $L$ is not semisimple, then there exists a non-zero abelian ideal $A$ of $L$. Take $0\neq a\in A$. For any $x\in L$, we observe that the composite map $\ad a\circ \ad x \circ \ad a$ sends $L$ to 0. Thus $(\ad a \circ \ad x)^2=0$. Hence $\kappa(a,x)=\tr(\ad a \circ \ad x)=0$ since the trace of a nilpotent linear map is 0. Hence $a\in L^\perp$. Therefore, $\kappa$ must be degenerate.
+\end{proof}
+
+Next, we prove that any semisimple complex Lie algebra is a direct sum of simple Lie algebras. 
+
+\begin{lem}\label{semisimple_ideal_oplus}
+    Let $L$ be a semisimple complex Lie algebra. Then for any non-trivial proper ideal $I$ of $L$, we have $L=I\oplus I^\perp$. Moreover, $I$ is semisimple.
+\end{lem}
+
+\begin{proof}
+    Let $\kappa$ denote the Killing form on $L$. It follows from Cartan's First Criterion that $I\cap I^\perp$ is solvable. So $I\cap I^\perp=0$ since $L$ is semisimple. By dimension counting, it follows that $L=I\oplus I^\perp$.
+
+    If $I$ is not semisimple, then by Cartan's Second Criterion, the Killing form on $I$ is degenerate. Hence there exists a non-zero $a\in I$ such that $\kappa(a,x)=0$ for all $x\in I$. But $\kappa(a,y)=0$ for all $y\in I^\perp$. Thus $a\in L^\perp$, and hence $L$ is not semisimple, a contradiction.
+\end{proof}
+
+\begin{thm}
+    Let $L$ be a complex Lie algebra. Then $L$ is semisimple if and only if there are simple ideals $L_1,\ldots,L_r$ of $L$ such that $L=L_1\oplus\cdots\oplus L_r$.
+\end{thm}
+
+\begin{proof}
+    Suppose that $L$ is semisimple. We use induction on $\dim L$. Let $I$ be an ideal of $L$ with the smallest possible non-zero dimension. If $I=L$, then we are done. Otherwise $I$ is a proper non-zero ideal of $L$. By Lemma \ref{semisimple_ideal_oplus}, $I$ and $I^\perp$ are semisimple. Hence by inductive hypothesis, we get the desired decomposition.
+
+    Conversely, suppose $L=L_1\oplus\cdots\oplus L_r$, where $L_1,\ldots,L_r$ are simple ideals of $L$. Denote $I=\rad L$. Then $[I,L_i]$ is a solvable ideal of the simple Lie subalgebra $L_i$ for each $i=1,2,\ldots,r$. Hence $[I,L_i]=0$ for each $i$. Thus $[I,L]=0$, which implies that $I\subset Z(L)$. But $Z(L)=Z(L_1)\oplus\cdots\oplus Z(L_r)=0$. Therefore $I=0$, and hence $L$ is semisimple.
+\end{proof}
+
+\section{Abstract Jordan Decomposition}
+
+\begin{lem}\label{ss_ad_eq_Der}
+    Let $L$ be a finite-dimensional complex semisimple Lie algebra. Then $\ad L=\Der L$. 
+\end{lem}
+
+\begin{proof}
+    Observe that for any $x,y\in L$ and $\delta\in \Der L$, we have 
+    \[
+        [\delta ,\ad x](y)=\delta[x,y]-[x,\delta y]=[\delta x,y]=\ad (\delta x)(y).
+    \]
+    Thus $\ad L$ is an ideal of $\Der L$. Since $L$ is semisimple, the kernel of $\ad:L\to \Der L$ is $Z(L)=0$, so $L\cong \ad L$ and hence $M:=\ad L$ is semisimple.
+
+    Consider the Killing form $\kappa$ on $\Der L$. To show that $M=\Der L$, it suffices to show that $M^\perp=0$. Note that the restriction of the Killing form $\kappa_M$ on $M$ is non-degenerate by Cartan's Second Criterion. It follows that $[M,M^\perp]\subset M\cap M^\perp =0$. Thus if $\delta\in M^\perp$, then $\ad (\delta x)=[\delta ,\ad x]=0$ for all $x\in L$. So $\delta x=0$, and hence $\delta=0$.
+\end{proof}
+
+\begin{prop}\label{d_n_in_Der}
+    Let $L$ be a complex Lie algebra. Suppose that $\delta\in \Der L\subset \gl(L)$ has a Jordan decomposition $\delta=\sigma+\nu$, where $\sigma$ is diagonalizable, $\nu$ is nilpotent, and $\sigma,\nu$ commute. Then $\sigma,\nu\in \Der L$.
+\end{prop}
+
+\begin{proof}
+    For $\lambda\in\mathbb{C}$, let 
+    \[
+        L_\lambda:=\{x\in L: (\delta-\lambda \cdot \id_L)^m x=0\mbox{ for some }m\geq 1\}.
+    \]
+    Note that if $\lambda$ is not an eigenvalue of $\delta$, then $L_\lambda=0$. By the Primary Decomposition Theorem in linear algebra, we have $L=\oplus_\lambda L_\lambda$. Now we show that $\sigma$ is a derivation, which will imply that $\nu$ is also a derivation. Since $\sigma$ is diagonalizable, its eigenspace of each eigenvalue $\lambda$ is exactly $L_\lambda$. It suffices to show that for any eigenvalues $\lambda,\mu$ of $\delta$, for any $x\in L_\lambda$, $y\in L_\mu$, we have $\sigma([x, y]) = [\sigma(x), y]+[x, \sigma(y)]=(\lambda+\mu)[x,y]$. In other words, it suffices to show that $[L_\lambda,L_\mu]\subset L_{\lambda+\mu}$. This follows from a direct calculation and is left to the reader.
+\end{proof}
+
+\begin{thm}[Abstract Jordan Decomposition]
+    Let $L$ be a complex semisimple Lie algebra. Then each $x\in L$ can be written uniquely as $x=d+n$, where $d,n\in L$ such that $\ad d$ is diagonalizable, $\ad n$ is nilpotent, and $[d,n]$=0. Furthermore, if $y\in L$ commutes with $x$, then $[d,y]=[n,y]=0$. We say that $x$ has \tfs{abstract Jordan decomposition} $x=d+n$. If $n=0$, then $x$ is said to be \tfs{semisimple}.
+\end{thm}
+
+\begin{proof}
+    We know that $\ad x\in\gl(L)$ has the Jordan decomposition $\ad x=\sigma+\nu$, where $\sigma\in\gl(L)$ is diagonalizable, $\nu\in\gl(L)$ is nilpotent, and $[\sigma,\nu]=0$. By Proposition \ref{d_n_in_Der} and Lemma \ref{ss_ad_eq_Der}, we know that $\sigma,\nu\in \Der L=\ad L$. So there exist $d,n\in L$ such that $\sigma=\ad d$ and $\nu=\ad n$. Hence $\ad x=\sigma+\nu=\ad d+\ad n=\ad (d+n)$. Since $\ad :L\to L$ is injective, we have $x=d+n$. Moreover, $\ad[d,n]=[\ad d,\ad n]=0$ implies $[d,n]=0$. The uniqueness of $d$ and $n$ follows from the uniqueness of the Jordan decomposition of $\ad x\in\gl(L)$.
+
+    Suppose that $y\in L$ and $[x,y]=0$. Since there is a polynomial $p(X)$ without constant term such that $\nu=p(\ad x)$, it follows that $\nu(y)=0$, i.e. $[n,y]=0$. Hence $[d,y]=0$.
+\end{proof}
+
+If the complex semisimple Lie algebra $L$ happens to be a Lie subalgebra of $\gl(V)$, then elements of $L$ have both the abstract Jordan decomposition and the usual Jordan decomposition (as linear transformations on $V$). In fact, the two decompositions agree.
+
+\begin{lem}\label{d_n_in_L}
+    Let $L\subset \gl(V)$ be a complex semisimple Lie algebra. For any $x\in L$, let $x=d+n$ denote its usual Jordan decomposition in $\gl(V)$. Then $d,n\in L$.
+\end{lem}
+
+\begin{proof}
+    See \cite[p. 29]{Humphreys_Lie_alg}. The proof uses Theorem \ref{weyl's_thm} (Weyl's Theorem).
+\end{proof}
+
+\begin{thm}
+    Let $L$ be a semisimple complex Lie algebra. Let $\theta:L\to \gl(V)$ be a representation of $L$. Suppose that $x\in L$ has abstract Jordan decomposition $x=d+n$. Then $\theta(x)\in\gl(V)$ has Jordan decomposition $\theta(x)=\theta(d)+\theta(n)$ in $\gl(V)$. 
+\end{thm}
+
+\begin{proof}
+    Since $L$ is semisimple, we have 
+    \[
+        \ima \theta \cong L / \ker \theta \cong (\ker \theta \oplus (\ker \theta )^\perp) / \ker \theta \cong (\ker \theta)^\perp.
+    \]
+    Hence $\ima \theta$ is semisimple. Thus we can talk about the abstract Jordan decomposition of elements in $\ima\theta$. Suppose that $x\in L$ has abstract Jordan decomposition $d+n$. By direct computation, we can verify that the abstract Jordan decomposition of $\theta(x)\in\ima \theta$ is $\theta(d)+\theta(n)$. Suppose the usual Jordan decomposition of $\theta(x)\in\gl(V)$ is $\sigma+\nu$. Then by Lemma \ref{d_n_in_L}, we have $\sigma,\nu\in \ima \theta$. Thus $\ad \sigma,\ad \nu:\gl(V)\to \gl(V)$ both map $\ima\theta$ into $\ima\theta$, and they are diagonalizable and nilpotent respectively. So $\ad \theta(x)=\ad \sigma+\ad \nu:\ima\theta\to \ima \theta$ is the Jordan decomposition of $\ad \theta(x)$ in $\gl(\ima \theta)$. Thus $\theta(x)=\sigma+\nu$ is the abstract Jordan decomposition of $\theta(x)$ in $\ima\theta$. By the uniqueness of the abstract Jordan decomposition, we get $\sigma=\theta(d)$ and $\nu=\theta(n)$, completing the proof.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

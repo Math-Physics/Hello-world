@@ -1,0 +1,174 @@
+\chapter{The Root Space Decomposition and Root Systems}
+
+\section{Representations of $\sl(2,\mathbb{C})$}
+
+Recall that $\sl(2,\mathbb{C})$ is a 3-dimensional Lie algebra with basis 
+\[
+    x:=
+    \left(
+        \begin{array}{cc}
+            0   &   1 \\
+            0   &   0        
+        \end{array}
+    \right),\quad y:=
+    \left(
+        \begin{array}{cc}
+            0   &   0 \\
+            1   &   0        
+        \end{array}
+    \right),\quad h:=
+    \left(
+        \begin{array}{cc}
+            1   &   0 \\
+            0   &   -1        
+        \end{array}
+    \right).
+\]
+We can verify that $[x,y]=h$, $[h,x]=2x$, and $[h,y]=-2y$.
+
+One can show that $\sl(2,\mathbb{C})$ is a simple Lie algebra. Hence by Weyl's Theorem, every finite-dimensional $\sl(2,\mathbb{C})$-module is a direct sum of irreducible $\sl(2,\mathbb{C})$-modules. So in this section we will study finite-dimensional irreducible $\sl(2,\mathbb{C})$-modules.
+
+Note that $\ad h:\sl(2,\mathbb{C})\to \sl(2,\mathbb{C})$ is diagonalizable. So $h$ is a semisimple element in $\sl(2,\mathbb{C})$. Let $V$ be any finite-dimensional $\sl(2,\mathbb{C})$-module. For $\lambda\in\mathbb{C}$, set $V_\lambda=\{v\in V:h(v) = \lambda v\}$. Then for all but finitely many $\lambda\in\mathbb{C}$, we have $V_\lambda = 0$. Also $V=\bigoplus_{\lambda\in\mathbb{C}}V_\lambda$.
+\begin{lem}
+    For all $\lambda\in\mathbb{C}$, we have $x V_{\lambda}\subset V_{\lambda+2}$ and $y V_{\lambda}\subset V_{\lambda-2}$.
+\end{lem}
+
+\begin{proof}
+    Easy.
+\end{proof}
+
+\begin{thm}
+    For every $\lambda\in\mathbb{Z}_{\geq 0}$, there exists an irreducible $\sl(2,\mathbb{C})$-module $V(\lambda)$ with basis $\{v_0,\ldots,v_\lambda\}$ such that for each $i=0,1,2,\ldots,\lambda$, we have
+    \begin{enumerate}
+        \item[(a)] $h(v_i)=(\lambda-2i)v_i$,
+        \item[(b)] $x(v_i)=(\lambda-i+1)v_{i-1}$ (set $v_{-1}=0$),
+        \item[(c)] $y(v_i)=(i+1)v_{i+1}$ (set $v_{\lambda+1}=0$).
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+    Set
+    \[
+        \bar{x}:=
+        \left(
+        \begin{array}{ccccc}
+                0 & \lambda                          \\
+                & 0       & \lambda-1              \\
+                &         & \ddots    & \ddots     \\
+                &         &           & \ddots & 1 \\
+                &         &           &        & 0
+            \end{array}
+        \right),\quad \bar{y}:=
+        \left(
+        \begin{array}{ccccc}
+                0 &                           \\
+                1 & 0       &             \\
+                &  2       &  \ddots   &      \\
+                &         &      \ddots     & \ddots &  \\
+                &         &           &    \lambda    & 0
+            \end{array}
+        \right),
+    \]
+    and
+    \[
+        \bar{h}:=
+        \left(
+        \begin{array}{cccc}
+                \lambda                          \\
+                & \lambda-2                     \\
+                &           & \ddots            \\
+                &           &        & -\lambda
+            \end{array}
+        \right).
+    \]
+    Then verify that $[\bar{x},\bar{y}]=\bar{h}$, $[\bar{h},\bar{x}]=2\bar{x}$ and $[\bar{h},\bar{y}]=-2\bar{y}$. Hence this gives a matrix representation of $\sl(2,\mathbb{C})$ with respect to the basis $\{v_0,\ldots,v_\lambda\}$ of $V(\lambda)$. Thus $V(\lambda)$ is an $\sl(2,\mathbb{C})$-module.
+
+    Next, we show that $V(\lambda)$ is irreducible. Let $W$ be any non-zero submodule of $V(\lambda)$. Since $h$ is diagonalizable on $V(\lambda)$, it is also diagonalizable on $W$. Note that all the eigenspaces of $h$ on $V(\lambda)$ are $\span\{v_i\}$, $i=0,1,\ldots,\lambda$, and they are all 1-dimensional. So every eigenspace of $h$ on $W$ must be some $\span\{v_i\}$. Thus $W$ contains some $v_i$. Since $x(v_j)=(\lambda-j+1)v_{j-1}$ and $y(v_j)=(j+1)v_{j+1}$, and $W$ is closed under the action of $x$ and $y$, we know that $W=V(\lambda)$.
+\end{proof}
+
+\begin{thm}
+    If $V$ is a finite-dimensional irreducible $\sl(2,\mathbb{C})$-module, then $V$ is isomorphic to $V(\lambda)$ for some $\lambda\in\mathbb{Z}_{\geq 0}$.
+\end{thm}
+
+\begin{proof}
+    Note that $V=\bigoplus_{\mu\in\mathbb{C}}V_\mu$, where $V_\mu=\{v\in V:h(v) = \mu v\}$. Choose $\lambda\in\mathbb{C}$ such that $V_\lambda\neq 0$ and $V_{\lambda+2}=0$. Take $0\neq w_0 \in V_\lambda$. Set $w_i=\frac{1}{i!}y^i(w_0)$ for $i\in\mathbb{Z}_{>0}$. 
+    
+    Claim that $h(w_i)=(\lambda-2i)w_i$, $x(w_i)=(\lambda-i+1)w_{i-1}$ (where we set $w_{-1}=0$), and $y(w_i)=(i+1)w_{i+1}$. This can be easily verified by using induction on $i$. Hence $\bigoplus_{i\geq 0}\span\{w_i\}$ is a non-zero submodule of $V$, so $V=\bigoplus_{i\geq 0}\span\{w_i\}$. Since $V$ is finite-dimensional, there exists $m\in\mathbb{Z}_{\geq 0}$ such that $w_i\neq 0$ for $i=0,1,\ldots,m$ and $w_{j}=0$ for all $j>m$. Then $(\lambda - m)w_m=x(w_{m+1})=0$, which implies $\lambda=m$. Thus $V=\bigoplus_{i= 0}^{m}\span\{w_i\}\cong V(m)=V(\lambda)$.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{The Root Space Decomposition}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Root Systems}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
